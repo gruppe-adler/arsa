@@ -1,0 +1,42 @@
+name: arsa
+
+services:
+  frontend:
+    container_name: 'arsa-frontend'
+    hostname: 'arsa-frontend'
+    image: arsa-frontend:latest
+    restart: unless-stopped
+    networks:
+      - network
+    ports:
+      - '80:80'
+  backend:
+    container_name: 'arsa-backend'
+    hostname: 'arsa-backend'
+    image: arsa-backend:latest
+    restart: unless-stopped
+    networks:
+      - network
+    ports:
+      - '3000:3000'
+    volumes:
+      - type: bind
+        source: /var/run/docker.sock
+        target: /var/run/docker.sock
+      - type: volume
+        source: arsa-servers
+        target: /app/servers
+      - type: volume
+        source: arsa-profiles
+        target: /app/profiles
+
+volumes:
+  arsa-servers:
+    name: "arsa-servers"
+  arsa-profiles:
+    name: "arsa-profiles"
+
+networks:
+  network:
+    driver: bridge
+    attachable: true
