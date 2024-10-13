@@ -58,5 +58,6 @@ docker compose up -d
 ### Stop
 - stop backend and frontend with:
 ```bash
+cd ~/arsa (or wherever you cloned the repo)
 docker compose down
 ```
