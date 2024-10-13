@@ -1,4 +1,4 @@
-# arsa
+# arsa - Arma Reforger Server Admin
 
 ## Installation Linux
 
@@ -19,7 +19,7 @@ getent group | grep docker
 ```
 - build backend and ars container using the above mentioned GID
 ```bash
-cd ~/arsa-backend (or whereever you cloned the repo)
+cd ~/arsa-backend (or wherever you cloned the repo)
 docker build -t arsa-backend --build-arg DOCKER_GID=988 .
 docker build -t ars ./ars
 ```
@@ -32,7 +32,7 @@ git clone https://github.com/y0014984/arsa-frontend
 - install node/npm from your distro or from https://nodejs.org/en/download/package-manager
 - build fromntend container
 ```bash
-cd ~/arsa-frontend (or whereever you cloned the repo)
+cd ~/arsa-frontend (or wherever you cloned the repo)
 npm run build
 npm run docker
 ```
@@ -44,7 +44,7 @@ git clone https://github.com/y0014984/arsa
 ```
 - start backend and frontend with:
 ```bash
-cd ~/arsa (or whereever you cloned the repo)
+cd ~/arsa (or wherever you cloned the repo)
 docker compose up -d
 ```
 - allow the following ports on yopur firewall 80, 3000 and for the default ars 2001, 17777, 19999
