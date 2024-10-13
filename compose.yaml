@@ -6,6 +6,9 @@ services:
     hostname: 'arsa-frontend'
     image: arsa-frontend:latest
     restart: unless-stopped
+    depends_on:
+      backend:
+        condition: service_started
     networks:
       - network
     ports:
