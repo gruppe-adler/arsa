@@ -30,6 +30,11 @@ docker build -t ars ./ars
 git clone https://github.com/y0014984/arsa-frontend
 ```
 - install node/npm from your distro or from https://nodejs.org/en/download/package-manager
+- change the environment variable to reflect the dns name or ip of your docker host
+```
+# .env.production
+VITE_API_URL=arsa.y0014984.org
+```
 - build fromntend container
 ```bash
 cd ~/arsa-frontend (or wherever you cloned the repo)
