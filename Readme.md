@@ -47,14 +47,11 @@ git clone https://github.com/y0014984/arsa
 cd ~/arsa (or wherever you cloned the repo)
 docker compose up -d
 ```
-- allow the following ports on yopur firewall 80, 3000 and for the default ars 2001, 17777, 19999
-- modify arsa-backend to allow access to docker
+- allow the following ports on your firewall 80, 3000 and for the default ars 2001, 17777, 19999
+- now you can access arsa on port 80 of the docker host
+
+### Stop
+- stop backend and frontend with:
 ```bash
-
-
-# enter running container
-docker exec -it arsa-backend /bin/sh
-
-# create group with correct gid and assign user
-addgroup --gid 989 docker && adduser deno docker
+docker compose down
 ```
