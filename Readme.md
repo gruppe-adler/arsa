@@ -6,12 +6,14 @@
 
 - install docker https://docs.docker.com/engine/install/
 - allow non-root user https://docs.docker.com/engine/install/linux-postinstall/
-- install git from your distro or from https://git-scm.com/downloads/linux
+- install GitHub CLI https://github.com/cli/cli/blob/trunk/docs/install_linux.md
+- install Deno https://docs.deno.com/runtime/getting_started/installation/
+- install NVM/NPM/Node https://nodejs.org/en/download/package-manager
 
 ### Backend
 - clone backend repository from https://github.com/y0014984/arsa-backend.git
 ```bash
-git clone https://github.com/y0014984/arsa-backend
+gh repo clone y0014984/arsa-backend
 ```
 - check the current group id (GID) of docker
 ```bash
@@ -27,7 +29,7 @@ docker build -t ars ./ars
 ### Frontend
 - clone frontend repository from https://github.com/y0014984/arsa-frontend.git
 ```bash
-git clone https://github.com/y0014984/arsa-frontend
+gh repo clone y0014984/arsa-frontend
 ```
 - install node/npm from your distro or from https://nodejs.org/en/download/package-manager
 - change the environment variable to reflect the dns name or ip of your docker host
@@ -45,7 +47,7 @@ npm run docker
 ### Start
 - clone this repository from https://github.com/y0014984/arsa.git
 ```bash
-git clone https://github.com/y0014984/arsa
+gh repo clone y0014984/arsa
 ```
 - start backend and frontend with:
 ```bash
