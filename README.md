@@ -7,8 +7,8 @@
 - install docker https://docs.docker.com/engine/install/
 - allow non-root user https://docs.docker.com/engine/install/linux-postinstall/
 - install GitHub CLI https://github.com/cli/cli/blob/trunk/docs/install_linux.md
-- ~~install Deno https://docs.deno.com/runtime/getting_started/installation/~~
-- ~~install NVM/NPM/Node https://nodejs.org/en/download/package-manager~~
+- install Deno https://docs.deno.com/runtime/getting_started/installation/
+- install NVM/NPM/Node https://nodejs.org/en/download/package-manager
 
 ### Backend
 - clone backend repository from https://github.com/y0014984/arsa-backend.git
@@ -22,8 +22,13 @@ getent group | grep docker
 - build backend and ars container using the above mentioned GID
 ```bash
 cd ~/arsa-backend (or wherever you cloned the repo)
-docker build -t arsa-backend --build-arg DOCKER_GID=988 .
+docker build -t arsa-backend .
 docker build -t ars ./ars
+// use --build-arg DOCKER_GID=988 or similar to adjust GID
+
+// or if deno is used
+deno task docker
+deno task docker-ars
 ```
 
 ### Frontend
