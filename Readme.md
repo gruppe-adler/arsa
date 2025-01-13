@@ -7,8 +7,8 @@
 - install docker https://docs.docker.com/engine/install/
 - allow non-root user https://docs.docker.com/engine/install/linux-postinstall/
 - install GitHub CLI https://github.com/cli/cli/blob/trunk/docs/install_linux.md
-- install Deno https://docs.deno.com/runtime/getting_started/installation/
-- install NVM/NPM/Node https://nodejs.org/en/download/package-manager
+- ~~install Deno https://docs.deno.com/runtime/getting_started/installation/~~
+- ~~install NVM/NPM/Node https://nodejs.org/en/download/package-manager~~
 
 ### Backend
 - clone backend repository from https://github.com/y0014984/arsa-backend.git
@@ -37,7 +37,7 @@ gh repo clone y0014984/arsa-frontend
 # .env.production
 VITE_API_URL=arsa.y0014984.org
 ```
-- build fromntend container
+- build frontend container
 ```bash
 cd ~/arsa-frontend (or wherever you cloned the repo)
 npm run build
