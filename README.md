@@ -1,10 +1,10 @@
 # arsa - Arma Reforger Server Admin
 
 ## Frontend
-https://github.com/y0014984/arsa-frontend
+https://github.com/gruppe-adler/arsa-frontend
 
 ## Backend
-https://github.com/y0014984/arsa-backend
+https://github.com/gruppe-adler/arsa-backend
 
 ## Installation Linux
 
@@ -17,9 +17,9 @@ https://github.com/y0014984/arsa-backend
 - install NVM/NPM/Node https://nodejs.org/en/download/package-manager
 
 ### Backend
-- clone backend repository from https://github.com/y0014984/arsa-backend.git
+- clone backend repository from https://github.com/gruppe-adler/arsa-backend.git
 ```bash
-gh repo clone y0014984/arsa-backend
+gh repo clone gruppe-adler/arsa-backend
 ```
 - check the current group id (GID) of docker
 ```bash
@@ -38,15 +38,15 @@ deno task docker-ars
 ```
 
 ### Frontend
-- clone frontend repository from https://github.com/y0014984/arsa-frontend.git
+- clone frontend repository from https://github.com/gruppe-adler/arsa-frontend.git
 ```bash
-gh repo clone y0014984/arsa-frontend
+gh repo clone gruppe-adler/arsa-frontend
 ```
 - install node/npm from your distro or from https://nodejs.org/en/download/package-manager
 - change the environment variable to reflect the dns name or ip of your docker host
 ```
 # .env.production
-VITE_API_URL=arsa.y0014984.org
+VITE_API_URL=arsa.gruppe-adler.de
 ```
 - build frontend container
 ```bash
@@ -56,9 +56,9 @@ npm run docker
 ```
 
 ### Start
-- clone this repository from https://github.com/y0014984/arsa.git
+- clone this repository from https://github.com/gruppe-adler/arsa.git
 ```bash
-gh repo clone y0014984/arsa
+gh repo clone gruppe-adler/arsa
 ```
 - start backend and frontend with:
 ```bash
