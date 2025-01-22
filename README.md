@@ -1,5 +1,10 @@
 # arsa - Arma Reforger Server Admin
 
+## Known Restrictions
+- No Experimental Branch Support
+- Configs are not automatically adjusted if an Reforger update requires changes to the config syntax
+- Mods on the server are downloaded for each server config separately in it's profile folder; this could lead to increasing storage usage
+
 ## Frontend
 https://github.com/gruppe-adler/arsa-frontend
 
