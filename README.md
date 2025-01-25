@@ -48,10 +48,10 @@ deno task docker-ars
 gh repo clone gruppe-adler/arsa-frontend
 ```
 - install node/npm from your distro or from https://nodejs.org/en/download/package-manager
-- change the environment variable to reflect the dns name or ip of your docker host
+- change the environment variable to reflect the dns name or ip of your backend
 ```
 # .env.production
-VITE_API_URL=arsa.gruppe-adler.de
+VITE_API_URL=arsa-api.gruppe-adler.de
 ```
 - build frontend container
 ```bash
