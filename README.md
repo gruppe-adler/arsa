@@ -34,12 +34,11 @@ getent group | grep docker
 ```bash
 cd ~/arsa-backend (or wherever you cloned the repo)
 docker build -t arsa-backend .
-docker build -t ars ./ars
 // use --build-arg DOCKER_GID=988 or similar to adjust GID
+// use --build-arg PORT=80 or similar to adjust port of the backend
 
 // or if deno is used
 deno task docker
-deno task docker-ars
 ```
 
 ### Frontend
@@ -48,7 +47,7 @@ deno task docker-ars
 gh repo clone gruppe-adler/arsa-frontend
 ```
 - install node/npm from your distro or from https://nodejs.org/en/download/package-manager
-- change the environment variable to reflect the dns name or ip of your backend
+- change the environment variable to reflect the dns name or ip of your backend including the port if it differs from port 80 e.g. api.host.com:3000
 ```
 # .env.production
 VITE_API_URL=arsa-api.gruppe-adler.de
