@@ -36,6 +36,7 @@ cd ~/arsa-backend (or wherever you cloned the repo)
 docker build -t arsa-backend .
 // use --build-arg DOCKER_GID=988 or similar to adjust GID
 // use --build-arg PORT=80 or similar to adjust port of the backend
+// also edit the port in .env.production
 
 // or if deno is used
 deno task docker
