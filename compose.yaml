@@ -4,24 +4,31 @@ services:
   frontend:
     container_name: 'arsa-frontend'
     hostname: 'arsa-frontend'
-    image: arsa-frontend:latest
+    image: ghcr.io/gruppe-adler/arsa-frontend:main
     restart: unless-stopped
     depends_on:
       backend:
         condition: service_started
     networks:
-      - network
-    ports:
-      - '80:80'
+      - nginx
+    environment:
+      - VIRTUAL_HOST=arsa.gruppe-adler.de
+      - LETSENCRYPT_HOST=arsa.gruppe-adler.de
+    labels:
+      com.centurylinklabs.watchtower.enable: "false"
+
   backend:
     container_name: 'arsa-backend'
     hostname: 'arsa-backend'
-    image: arsa-backend:latest
+    image: ghcr.io/gruppe-adler/arsa-backend:main
     restart: unless-stopped
     networks:
-      - network
-    ports:
-      - '3000:3000'
+      - nginx
+    environment:
+      - VIRTUAL_HOST=arsa-api.gruppe-adler.de
+      - LETSENCRYPT_HOST=arsa-api.gruppe-adler.de
+    labels:
+      com.centurylinklabs.watchtower.enable: "false"
     volumes:
       - type: bind
         source: /var/run/docker.sock
@@ -29,17 +36,15 @@ services:
       - type: volume
         source: arsa-servers
         target: /app/servers
-      - type: volume
-        source: arsa-profiles
+      - type: bind
+        source: /etc/arsa/arsa-profiles
         target: /app/profiles
 
 volumes:
   arsa-servers:
     name: "arsa-servers"
-  arsa-profiles:
-    name: "arsa-profiles"
 
 networks:
-  network:
-    driver: bridge
-    attachable: true
+  nginx:
+    external:
+      name: nginx-proxy
