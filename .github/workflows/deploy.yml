@@ -56,7 +56,7 @@ jobs:
               uses: actions/download-artifact@v4
               with:
                   name: production-files
-                  path: ./app
+                  path: ./dist
 
             - name: Log in to the Container registry
               uses: docker/login-action@v3
