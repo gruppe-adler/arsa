@@ -40,7 +40,7 @@ services:
         target: /app/servers
       - type: bind
         source: /etc/arsa/arsa-profiles
-        target: /app/profile
+        target: /app/profiles
 
 volumes:
   arsa-servers:
