@@ -1,0 +1,54 @@
+name: arsa
+
+services:
+  arsa-proxy:
+    container_name: 'auth-proxy-arsa'
+    hostname: 'auth-proxy-arsa'
+    image: ghcr.io/gruppe-adler/auth-proxy:master
+    restart: unless-stopped
+    networks:
+      - nginx
+      - arsa
+    environment:
+      - VIRTUAL_HOST=arsa.gruppe-adler.de
+      - LETSENCRYPT_HOST=arsa.gruppe-adler.de
+    labels:
+      com.centurylinklabs.watchtower.enable: "false"
+    volumes:
+      - type: bind
+        source: ./auth-proxy-config-arsa/config.js
+        target: /app/config.js
+
+  arsa:
+    container_name: 'arsa'
+    hostname: 'arsa'
+    image: ghcr.io/gruppe-adler/arsa:main
+    restart: unless-stopped
+    depends_on:
+      arsa-proxy:
+        condition: service_started
+    networks:
+      - arsa
+    labels:
+      com.centurylinklabs.watchtower.enable: "false"
+    volumes:
+      - type: bind
+        source: /var/run/docker.sock
+        target: /var/run/docker.sock
+      - type: volume
+        source: arsa-servers
+        target: /app/servers
+      - type: bind
+        source: /etc/arsa/arsa-profiles
+        target: /app/profile
+
+volumes:
+  arsa-servers:
+    name: "arsa-servers"
+
+networks:
+  arsa:
+    name: arsa
+  nginx:
+    external:
+      name: nginx-proxy

@@ -1,0 +1,89 @@
+name: arsa
+
+services:
+  frontend-proxy:
+    container_name: 'auth-proxy-arsa-frontend'
+    hostname: 'auth-proxy-arsa-frontend'
+    image: ghcr.io/gruppe-adler/auth-proxy:master
+    restart: unless-stopped
+    networks:
+      - nginx
+      - arsa-frontend
+    environment:
+      - VIRTUAL_HOST=arsa.gruppe-adler.de
+      - LETSENCRYPT_HOST=arsa.gruppe-adler.de
+    labels:
+      com.centurylinklabs.watchtower.enable: "false"
+    volumes:
+      - type: bind
+        source: ./auth-proxy-config-arsa-frontend/config.js
+        target: /app/config.js
+
+  backend-proxy:
+    container_name: 'auth-proxy-arsa-backend'
+    hostname: 'auth-proxy-arsa-backend'
+    image: ghcr.io/gruppe-adler/auth-proxy:master
+    restart: unless-stopped
+    networks:
+      - nginx
+      - arsa-backend
+    environment:
+      - VIRTUAL_HOST=arsa-api.gruppe-adler.de
+      - LETSENCRYPT_HOST=arsa-api.gruppe-adler.de
+    labels:
+      com.centurylinklabs.watchtower.enable: "false"
+    volumes:
+      - type: bind
+        source: ./auth-proxy-config-arsa-backend/config.js
+        target: /app/config.js
+
+  frontend:
+    container_name: 'arsa-frontend'
+    hostname: 'arsa-frontend'
+    image: ghcr.io/gruppe-adler/arsa-frontend:main
+    restart: unless-stopped
+    depends_on:
+      frontend-proxy:
+        condition: service_started
+      backend:
+        condition: service_started
+    networks:
+       - arsa-frontend
+    labels:
+      com.centurylinklabs.watchtower.enable: "false"
+
+  backend:
+    container_name: 'arsa-backend'
+    hostname: 'arsa-backend'
+    image: ghcr.io/gruppe-adler/arsa-backend:main
+    restart: unless-stopped
+    depends_on:
+      backend-proxy:
+        condition: service_started
+    networks:
+      - arsa-backend
+    labels:
+      com.centurylinklabs.watchtower.enable: "false"
+    volumes:
+      - type: bind
+        source: /var/run/docker.sock
+        target: /var/run/docker.sock
+      - type: volume
+        source: arsa-servers
+        target: /app/servers
+      - type: bind
+        source: /etc/arsa/arsa-profiles
+        target: /app/profile
+
+volumes:
+  arsa-servers:
+    name: "arsa-servers"
+
+networks:
+  arsa-frontend:
+    name: arsa-frontend
+  arsa-backend:
+    name: arsa-backend
+  nginx:
+    external:
+      name: nginx-proxy
