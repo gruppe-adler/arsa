@@ -25,11 +25,7 @@ https://github.com/gruppe-adler/arsa-backend
 ```bash
 gh repo clone gruppe-adler/arsa-backend
 ```
-- check the current group id (GID) of docker
-```bash
-getent group | grep docker
-```
-- start backend dev environment using the above mentioned GID
+- start backend dev environment
 ```bash
 cd ~/arsa-backend (or wherever you cloned the repo)
 
