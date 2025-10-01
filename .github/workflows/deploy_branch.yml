@@ -5,7 +5,7 @@ on:
 
 env:
     REGISTRY: ghcr.io
-    IMAGE_NAME: ${{ github.repository }}:${{ github.ref_name }}
+    IMAGE_NAME: ${{ github.repository }}-${{ github.ref_name }}
 
 jobs:
     build-frontend:
