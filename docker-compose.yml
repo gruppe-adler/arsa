@@ -10,6 +10,7 @@ services:
         condition: service_started
     networks:
       - arsa
+      - nginx
 
   backend:
     hostname: 'arsa-backend'
@@ -17,19 +18,29 @@ services:
     restart: unless-stopped
     env_file:
       - .env
+    # The backend runs as 1000:1000 and needs the group of the docker socket (DOCKER_GID in .env)
+    group_add:
+      - '${DOCKER_GID:?set DOCKER_GID in .env to the group id of /var/run/docker.sock}'
     networks:
       - arsa
+      - nginx
     volumes:
       - arsa-db-volume:/app/db
-      - arsa-servers-volume:/ars/servers
-      - arsa-repo-volume:/ars/repo
+      - arsa-servers-volume:/app/ars/servers
+      - arsa-repo-volume:/app/ars/repo
       - /var/run/docker.sock:/var/run/docker.sock
 
 volumes:
   arsa-db-volume:
+    name: arsa-db-volume
   arsa-servers-volume:
+    name: arsa-servers-volume
   arsa-repo-volume:
+    name: arsa-repo-volume
 
 networks:
   arsa:
     internal: true
+  nginx:
+    name: nginx-proxy
+    external: true
